@@ -62,16 +62,16 @@ const imageUrls = [
         if (!this.message) throw new Error("Provide message to display on card");
         this.setBackground(imageUrls)
 
-        if(this.username.length >= 16) {
-            throw new Error(`The Username Should be Less Than 15 Words`);
+        if(this.username.length >= 27) {
+            throw new Error(`The Username Should be Less Than or Equal To 27 Words`);
         }
 
-        if(this.title.length >= 16) {
-            throw new Error(`The title Should be Less Than 15 Words`);
+        if(this.title.length >= 27) {
+            throw new Error(`The title Should be Less Than or Equal To 27 Words`);
         }
 
-        if (this.message.length >= 36) {
-            throw new Error(`The message Should be Less Than 36 Words`);
+        if (this.message.length >= 27) {
+            throw new Error(`The message Should be Less Than or Equal To 27 Words`);
         }
 
     const canvasWidth = 1280;
