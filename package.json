@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.44"
+  },
+  "name": "welcome-canvas",
+  "version": "0.1.2",
+  "description": "welcome-canvas is a powerful canvas project with high-quality design ",
+  "main": "welcome.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrRandom23/welcome-canvas.git"
+  },
+  "keywords": [
+    "welcome bot discord",
+    "canvas",
+    "welcome images",
+    "custom welcome"
+  ],
+  "author": "cooldevs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrRandom23/welcome-canvas/issues"
+  },
+  "homepage": "https://github.com/MrRandom23/welcome-canvas#readme"
+}
