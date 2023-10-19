@@ -77,7 +77,7 @@ client.login('YOUR_BOT_TOKEN');
 - Generate the welcome card image and return it as a buffer.
 
 ## Preview
-https://s6.imgcdn.dev/9Dw5M.png
+![preview](https://s6.imgcdn.dev/9Dw5M.png)
 
 ## License
 
