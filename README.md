@@ -77,7 +77,7 @@ client.login('YOUR_BOT_TOKEN');
 - Generate the welcome card image and return it as a buffer.
 
 ## Preview
-https://media.discordapp.net/attachments/1118398421406068796/1164514927826960455/file.png
+https://s6.imgcdn.dev/9Dw5M.png
 
 ## License
 
