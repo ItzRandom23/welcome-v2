@@ -1,6 +1,6 @@
 # Welcome-Canvas
 
-Welcome-Canvas is a Node.js module for creating customized welcome images for Discord servers using the Discord.js library. It allows you to generate beautiful welcome images with user avatars, usernames, and a custom message.
+Welcome-Canvas is a Node.js module for creating customized welcome images for Discord servers. It allows you to generate beautiful welcome images with user avatars, usernames, and a custom message.
 
 ## Installation
 
@@ -16,33 +16,53 @@ Here's an example of how to use Welcome-Canvas in your Discord bot:
 
 ```javascript
 const { Client, GatewayIntentBits } = require('discord.js');
-const { welcome } = require('welcome-canvas'); // Make sure the path to your 'welcome.js' file is correct
+const { welcome } = require('welcome-canvas'); 
 
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
-    // Add other intents you need here
   ],
 });
+
+// Define an array of background images
+const backgroundImages = [
+    'https://s6.imgcdn.dev/ZpcLw.png',
+    'https://s6.imgcdn.dev/ZpCUT.png',
+    'https://s6.imgcdn.dev/Zp4wt.png',
+    'https://s6.imgcdn.dev/ZpNo9.png',
+    'https://s6.imgcdn.dev/Zpisy.png',
+    'https://s6.imgcdn.dev/Zpkx8.png',
+    'https://s6.imgcdn.dev/ZpnH2.png',
+  ];
+
+let currentBackgroundIndex = 0; 
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
 });
 
 client.on('guildMemberAdd', async (member) => {
-  // Create an instance of the Welcome class with your custom options
-  const welcomeCard = new welcome()
-  .setName(member.user.username)
-  .setAvatar(member.user.displayAvatarURL({ format: 'png' }))
-  .setTitle('Welcome')
-  .setMessage(`You are our ${member.guild.memberCount} Member`)
+  const channelId = '1157243263728762900'; // Replace with the desired channel ID
+  const channel = await client.channels.fetch(channelId); // Fetch the channel by ID
+  if (channel) {
+   
+    const welcomeCard = new welcome()
+      .setName(member.user.username)
+      .setAvatar(member.user.displayAvatarURL({ format: 'png' }))
+      .setTitle('Welcome')
+      .setMessage(`You are our ${member.guild.memberCount} Member`)
+      .setBackground(backgroundImages[currentBackgroundIndex]); // Use the current background
 
-  // Call the build method to create the welcome image
-  const welcomeImageBuffer = await welcomeCard.build();
+    
+    const welcomeImageBuffer = await welcomeCard.build();
 
-  // Send the welcome image as a message attachment
-  member.guild.systemChannel.send({ files: [welcomeImageBuffer] });
+    
+    channel.send({ files: [welcomeImageBuffer] });
+
+    
+    currentBackgroundIndex = (currentBackgroundIndex + 1) % backgroundImages.length;
+  }
 });
 
 
@@ -57,7 +77,7 @@ client.login('YOUR_BOT_TOKEN');
   - `avatar` (String) - The URL of the user's avatar.
   - `title` (String) - The title text on the welcome card.
   - `message` (String) - The message to display on the welcome card.
-
+  - `background` (String) - The background to display on the welcome card.
 ### setName(name)
 - Set the username for the welcome card.
 
@@ -73,8 +93,9 @@ client.login('YOUR_BOT_TOKEN');
 ### setMessage(message)
 - Set the message to display on the welcome card.
 
-### build()
-- Generate the welcome card image and return it as a buffer.
+### setbackground(background)
+- Set the background to display on the welcome card.
+
 
 ## Preview
 ![preview](https://s6.imgcdn.dev/9Dw5M.png)
