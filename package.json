@@ -3,7 +3,7 @@
     "@napi-rs/canvas": "^0.1.44"
   },
   "name": "welcome-canvas",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "welcome-canvas is a powerful canvas project with high-quality design ",
   "main": "welcome.js",
   "devDependencies": {},
