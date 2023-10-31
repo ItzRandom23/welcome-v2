@@ -3,10 +3,12 @@
     "@napi-rs/canvas": "^0.1.44"
   },
   "name": "welcome-canvas",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "welcome-canvas is a powerful canvas project with high-quality design ",
   "main": "welcome.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.8.10"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,11 +17,17 @@
     "url": "git+https://github.com/MrRandom23/welcome-canvas.git"
   },
   "keywords": [
-    "welcome bot discord",
+    "welcome-bot",
+    "discord",
     "canvas",
-    "welcome images",
-    "custom welcome"
-  ],
+    "custom-welcome",
+    "user-greetings",
+    "welcome-images",
+    "greeting-card",
+    "discord-bot-tools",
+    "custom-card-generator",
+    "user-onboarding"
+],
   "author": "cooldevs",
   "license": "MIT",
   "bugs": {
