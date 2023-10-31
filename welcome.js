@@ -1,81 +1,60 @@
 const { createCanvas, loadImage, GlobalFonts } = require("@napi-rs/canvas");
 
 GlobalFonts.registerFromPath(
-  "node_modules/welcome-canvas/font/Caveat-VariableFont_wght.ttf",
+  "node_modules/welcome-canvas/font/PlayfairDisplay-SemiBold.ttf",
   "username"
 );
 GlobalFonts.registerFromPath(
   "node_modules/welcome-canvas/font/Montserrat-ExtraLight.ttf",
-  "montserrat-extra-light"
+  "message"
 );
 GlobalFonts.registerFromPath(
-  "node_modules/welcome-canvas/font/EduSABeginner-VariableFont_wght.ttf",
+  "node_modules/welcome-canvas/font/Ubuntu-Regular.ttf",
   "welcome"
 );
 
-//Default background image
-const defaultBg = "https://s6.imgcdn.dev/ZpIVD.png";
+const imageUrls = "https://s6.imgcdn.dev/ZpIVD.png";
 
-class Welcome {
+class welcome {
   constructor(options) {
-    this.username = options?.member?.username?.name;
-    this.usernameColor = options?.member?.username?.color ?? "#FFD700";
-    this.avatar = options?.member?.avatar;
-    this.title = options?.title?.text;
-    this.titleColor = options?.title?.color ?? "#FFFFFF";
-    this.message = options?.message?.text;
-    this.messageColor = options?.message?.color ?? "#FFFFFF";
+    this.username = options?.username;
+    this.avatar = options?.avatar;
+    this.title = options?.title;
+    this.message = options?.message;
     this.background = options?.background;
   }
 
-  /**
-   * @param {string} text
-   * @param {string} color
-   */
-  setName(text, color) {
+  setName(name) {
     this.username = name;
-    this.usernameColor = color ?? "#FFD700";
     return this;
   }
-  /**
-   * @param {string} imageUrl
-   */
-  setAvatar(imageUrl) {
-    this.avatar = imageUrl;
+
+  setAvatar(image) {
+    this.avatar = image;
     return this;
   }
-  /**
-   * @param {string} text
-   * @param {string} color
-   */
-  setTitle(text, color) {
-    this.title = text;
-    this.titleColor = color ?? "#FFFFFF";
+
+  setTitle(title) {
+    this.title = title;
     return this;
   }
-  /**
-   * @param {string} text
-   * @param {string} color
-   */
-  setMessage(text, color) {
-    this.message = text;
-    this.messageColor = message ?? "#FFFFFF";
+
+  setMessage(message) {
+    this.message = message;
     return this;
   }
-  /**
-   * @param {string} backgroundUrl
-   */
-  setBackground(backgroundUrl) {
-    this.background = backgroundUrl;
+
+  setBackground(background) {
+    this.background = background;
     return this;
   }
 
   async build() {
     if (!this.username) throw new Error("Provide username to display on card");
     if (!this.avatar) throw new Error("Provide valid avatar url of user");
-    if (!this.message) throw new Error("Provide message to display on card");
-    if (!this.background) this.setBackground(defaultBg);
     if (!this.title) this.setTitle("WELCOME");
+    if (!this.message) throw new Error("Provide message to display on card");
+    if (!this.background) this.setBackground(imageUrls);
 
     if (this.username.length >= 27) {
       this.username = this.username.slice(0, 24) + "...";
@@ -107,22 +86,19 @@ class Welcome {
 
     const avatar = await loadImage(this.avatar);
 
-    ctx.fillStyle = this.usernameColor;
+    ctx.fillStyle = "#FFD700";
     ctx.font = "91px username";
     ctx.textAlign = "center";
-
     ctx.fillText(`${this.username}`.toUpperCase(), centerX, centerY + 70);
-
-    ctx.fillStyle = this.titleColor;
+    ctx.fillStyle = "#FFFFFF";
     ctx.globalAlpha = 0.4;
 
     ctx.fillStyle = "#00BFFF";
     ctx.font = "76px welcome";
-
     ctx.fillText(`${this.title}`, centerX, centerY + 150);
-    ctx.fillStyle = this.messageColor;
-    ctx.font = "bold 41px montserrat-extra-light";
 
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "bold 41px message";
     ctx.fillText(`${this.message}`.toUpperCase(), centerX, centerY + 290);
 
     ctx.globalAlpha = 1;
@@ -139,5 +115,4 @@ class Welcome {
   }
 }
 
-
-module.exports = { Welcome };
+module.exports = { welcome };
