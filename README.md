@@ -16,7 +16,7 @@ Here's an example of how to use Welcome-Canvas in your Discord bot:
 
 ```javascript
 const { Client, GatewayIntentBits } = require('discord.js');
-const { welcome } = require('welcome-canvas'); 
+const { Welcome } = require('welcome-canvas'); 
 
 const client = new Client({
   intents: [
@@ -47,11 +47,11 @@ client.on('guildMemberAdd', async (member) => {
   const channel = await client.channels.fetch(channelId); // Fetch the channel by ID
   if (channel) {
    
-    const welcomeCard = new welcome()
-      .setName(member.user.username)
+    const welcomeCard = new Welcome()
+      .setName(member.user.username, '#FFD700')
       .setAvatar(member.user.displayAvatarURL({ format: 'png' }))
-      .setTitle('Welcome')
-      .setMessage(`You are our ${member.guild.memberCount} Member`)
+      .setTitle('Welcome', 'FFFFFF')
+      .setMessage(`You are our ${member.guild.memberCount} Member`, 'FFFFFF')
       .setBackground(backgroundImages[currentBackgroundIndex]); // Use the current background
 
     
