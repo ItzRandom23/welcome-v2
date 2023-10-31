@@ -16,7 +16,7 @@ Here's an example of how to use Welcome-Canvas in your Discord bot:
 
 ```javascript
 const { Client, GatewayIntentBits } = require('discord.js');
-const { welcome } = require('welcome-canvas'); 
+const { Welcome } = require('welcome-canvas'); 
 
 const client = new Client({
   intents: [
@@ -47,11 +47,11 @@ client.on('guildMemberAdd', async (member) => {
   const channel = await client.channels.fetch(channelId); // Fetch the channel by ID
   if (channel) {
    
-    const welcomeCard = new welcome()
-      .setName(member.user.username)
+    const welcomeCard = new Welcome()
+      .setName(member.user.username, '#FFD700')
       .setAvatar(member.user.displayAvatarURL({ format: 'png' }))
-      .setTitle('Welcome')
-      .setMessage(`You are our ${member.guild.memberCount} Member`)
+      .setTitle('Welcome', 'FFFFFF')
+      .setMessage(`You are our ${member.guild.memberCount} Member`, 'FFFFFF')
       .setBackground(backgroundImages[currentBackgroundIndex]); // Use the current background
 
     
@@ -71,27 +71,34 @@ client.login('YOUR_BOT_TOKEN');
 
 ## API
 
-### new welcome(options)
-- `options` (Object) - An object with the following optional properties:
-  - `username` (String) - The username to display on the welcome card.
-  - `avatar` (String) - The URL of the user's avatar.
-  - `title` (String) - The title text on the welcome card.
-  - `message` (String) - The message to display on the welcome card.
-  - `background` (String) - The background to display on the welcome card.
-### setName(name)
-- Set the username for the welcome card.
+### new Welcome(options)
+- `options`:Object - An object with the following optional properties:
+  - `member`:Object - An object for the member optional properties:
+    - `avatar`:String - The URL of the user's avatar.
+    - `username`:Object - An object for the member username optional properties:
+      - `name`:String - The username to display on the welcome card.
+      - `color`:String - The color of the username to display on the welcome card. (optional)
+  - `title`:Object - An object for the title optional properties:
+    - `text`:String - The title text on the welcome card. (optional)
+    - `color`:String - The color of the title to display on the welcome card. (optional)
+
+  - `message`:Object - An object for the message optional properties:
+    - `text`:String - The message to display on the welcome card.
+    - `color`:String - The color of the message to display on the welcome card. (optional)
+
+  - `background`:String - The background to display on the welcome card. (optional)
+
+### setName(text, color)
+- Set the username & username color for the welcome card. (Note: color is optional.)
 
 ### setAvatar(image)
 - Set the avatar image for the welcome card.
 
-### setTitle(title)
-- Set the title text for the welcome card.
+### setTitle(text, color)
+- Set the title text & title color for the welcome card. (Note: color is optional)
 
-### setColor(color)
-- Set the color for text and graphics on the welcome card.
-
-### setMessage(message)
-- Set the message to display on the welcome card.
+### setMessage(text, color)
+- Set the message & message color to display on the welcome card. (Note: color is optional)
 
 ### setbackground(background)
 - Set the background to display on the welcome card.

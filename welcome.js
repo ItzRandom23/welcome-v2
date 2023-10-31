@@ -13,48 +13,69 @@ GlobalFonts.registerFromPath(
   "welcome"
 );
 
-const imageUrls = "https://s6.imgcdn.dev/ZpIVD.png";
+//Default background image
+const defaultBg = "https://s6.imgcdn.dev/ZpIVD.png";
 
-class welcome {
+class Welcome {
   constructor(options) {
-    this.username = options?.username;
-    this.avatar = options?.avatar;
-    this.title = options?.title;
-    this.message = options?.message;
+    this.username = options?.member?.username?.name;
+    this.usernameColor = options?.member?.username?.color ?? "#FFD700";
+    this.avatar = options?.member?.avatar;
+    this.title = options?.title?.text;
+    this.titleColor = options?.title?.color ?? "#FFFFFF";
+    this.message = options?.message?.text;
+    this.messageColor = options?.message?.color ?? "#FFFFFF";
     this.background = options?.background;
   }
 
-  setName(name) {
+  /**
+   * @param {string} text
+   * @param {string} color
+   */
+  setName(text, color) {
     this.username = name;
+    this.usernameColor = color ?? "#FFD700";
     return this;
   }
-
-  setAvatar(image) {
-    this.avatar = image;
+  /**
+   * @param {string} imageUrl
+   */
+  setAvatar(imageUrl) {
+    this.avatar = imageUrl;
     return this;
   }
-
-  setTitle(title) {
-    this.title = title;
+  /**
+   * @param {string} text
+   * @param {string} color
+   */
+  setTitle(text, color) {
+    this.title = text;
+    this.titleColor = color ?? "#FFFFFF";
     return this;
   }
-
-  setMessage(message) {
-    this.message = message;
+  /**
+   * @param {string} text
+   * @param {string} color
+   */
+  setMessage(text, color) {
+    this.message = text;
+    this.messageColor = message ?? "#FFFFFF";
     return this;
   }
-
-  setBackground(background) {
-    this.background = background;
+  /**
+   * @param {string} backgroundUrl
+   */
+  setBackground(backgroundUrl) {
+    this.background = backgroundUrl;
     return this;
   }
 
   async build() {
     if (!this.username) throw new Error("Provide username to display on card");
     if (!this.avatar) throw new Error("Provide valid avatar url of user");
-    if (!this.title) this.setTitle("WELCOME");
     if (!this.message) throw new Error("Provide message to display on card");
-    if (!this.background) this.setBackground(imageUrls);
+    if (!this.background) this.setBackground(defaultBg);
+    if (!this.title) this.setTitle("WELCOME");
 
     if (this.username.length >= 27) {
       this.username = this.username.slice(0, 24) + "...";
@@ -86,20 +107,20 @@ class welcome {
 
     const avatar = await loadImage(this.avatar);
 
-    ctx.fillStyle = "#FFD700";
+    ctx.fillStyle = this.usernameColor;
     ctx.font = "91px username";
     ctx.textAlign = "center";
 
     ctx.fillText(`${this.username}`.toUpperCase(), centerX, centerY + 70);
 
-    ctx.fillStyle = "#FFFFFF";
+    ctx.fillStyle = this.titleColor;
     ctx.globalAlpha = 0.4;
 
     ctx.fillStyle = "#00BFFF";
     ctx.font = "76px welcome";
 
     ctx.fillText(`${this.title}`, centerX, centerY + 150);
-    ctx.fillStyle = "#FFFFFF";
+    ctx.fillStyle = this.messageColor;
     ctx.font = "bold 41px montserrat-extra-light";
 
     ctx.fillText(`${this.message}`.toUpperCase(), centerX, centerY + 290);
@@ -118,4 +139,5 @@ class welcome {
   }
 }
 
-module.exports = { welcome };
+
+module.exports = { Welcome };
