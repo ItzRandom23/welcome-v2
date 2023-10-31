@@ -77,15 +77,6 @@ class Welcome {
     if (!this.background) this.setBackground(defaultBg);
     if (!this.title) this.setTitle("WELCOME");
 
-    if (typeof this.username !== 'string') throw new Error("Username must be string");
-    if (typeof this.avatar !== 'string') throw new Error("Avatar must be string");
-    if (typeof this.message !== 'string') throw new Error("Message must be string");
-    if (typeof this.title !== 'string') throw new Error("Title must be string");
-    if (typeof this.username !== 'string') throw new Error("Background must be string");
-    if (typeof(this.usernameColor && this.titleColor && this.messageColor) !== 'string') throw new Error("Color must be string");
-
-
-
     if (this.username.length >= 27) {
       this.username = this.username.slice(0, 24) + "...";
     }
