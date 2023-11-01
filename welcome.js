@@ -15,7 +15,7 @@ GlobalFonts.registerFromPath(
 
 const imageUrls = "https://s6.imgcdn.dev/ZpIVD.png";
 
-class welcome {
+class Welcome {
   constructor(options) {
     this.username = options?.username;
     this.avatar = options?.avatar;
@@ -115,4 +115,4 @@ class welcome {
   }
 }
 
-module.exports = { welcome };
+module.exports = { Welcome };
