@@ -25,18 +25,14 @@ const client = new Client({
   ],
 });
 
-// Define an array of background images
-const backgroundImages = [
-    'https://s6.imgcdn.dev/ZpcLw.png',
-    'https://s6.imgcdn.dev/ZpCUT.png',
-    'https://s6.imgcdn.dev/Zp4wt.png',
-    'https://s6.imgcdn.dev/ZpNo9.png',
-    'https://s6.imgcdn.dev/Zpisy.png',
-    'https://s6.imgcdn.dev/Zpkx8.png',
-    'https://s6.imgcdn.dev/ZpnH2.png',
-  ];
-
-let currentBackgroundIndex = 0; 
+// Remove "//" if you need multiple backgrounds 
+// const backgroundImages = [
+//    'your png background link here',
+//    'your png background link here',
+//    'your png background link here',
+//    'your png background link here',
+//  ];
+// let currentBackgroundIndex = 0; 
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
@@ -52,15 +48,16 @@ client.on('guildMemberAdd', async (member) => {
       .setAvatar(member.user.displayAvatarURL({ format: 'png' }))
       .setTitle('Welcome') // To change the color of the text, use this .setTitle('Welcome`, '#FFFFFF') You can replace with your own hex code 
       .setMessage(`You are our ${member.guild.memberCount} Member`)  // To change the color of the text, use this .setMessage(`You are our ${member.guild.memberCount} Member`, '#FFFFFF') You can replace with your own hex code 
-      .setBackground(backgroundImages[currentBackgroundIndex]); 
+   // Remove "//" if you have added background 
+   //   .setBackground(backgroundImages[currentBackgroundIndex]); 
     
     const welcomeImageBuffer = await welcomeCard.build();
 
     
     channel.send({ files: [welcomeImageBuffer] });
 
-    
-    currentBackgroundIndex = (currentBackgroundIndex + 1) % backgroundImages.length;
+// Remove "//" if you have multiple backgrounds and want a different background every time 
+//    currentBackgroundIndex = (currentBackgroundIndex + 1) % backgroundImages.length;
   }
 });
 
