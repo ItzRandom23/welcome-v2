@@ -13,7 +13,7 @@ GlobalFonts.registerFromPath(
   "welcome"
 );
 
-const imageUrls = "https://s6.imgcdn.dev/ZpIVD.png";
+const imageUrls = "https://media.discordapp.net/attachments/1118398421406068796/1164200559797096448/b53dc405-19e7-4aea-98e1-4b66509ca30a.png?ex=6554ce43&is=65425943&hm=49da0ba960d7f14b57fd6aa130028b00752b56a50f1f0698f59f835addbdc14b&=&width=993&height=662";
 
 class Welcome {
   constructor(options) {
@@ -22,10 +22,16 @@ class Welcome {
     this.title = options?.title;
     this.message = options?.message;
     this.background = options?.background;
+    this.usernameColor = options?.usernameColor || "#FFD700"; // Default color
+    this.titleColor = options?.titleColor || "#00BFFF"; // Default color
+    this.messageColor = options?.messageColor || "#FFFFFF"; // Default color
   }
 
-  setName(name) {
+  setName(name, usernameColor) {
     this.username = name;
+    if (usernameColor) {
+      this.usernameColor = usernameColor;
+    }
     return this;
   }
 
@@ -34,13 +40,19 @@ class Welcome {
     return this;
   }
 
-  setTitle(title) {
+  setTitle(title, titleColor) {
     this.title = title;
+    if (titleColor) {
+      this.titleColor = titleColor;
+    }
     return this;
   }
 
-  setMessage(message) {
+  setMessage(message, messageColor) {
     this.message = message;
+    if (messageColor) {
+      this.messageColor = messageColor;
+    }
     return this;
   }
 
@@ -48,6 +60,7 @@ class Welcome {
     this.background = background;
     return this;
   }
+
 
   async build() {
     if (!this.username) throw new Error("Provide username to display on card");
@@ -81,23 +94,22 @@ class Welcome {
     const backgroundImage = await loadImage(this.background);
     ctx.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
 
-    const gradientImage = await loadImage("https://s6.imgcdn.dev/9Qs3v.png");
+    const gradientImage = await loadImage("https://media.discordapp.net/attachments/1118398421406068796/1167425380274147449/ZqFsH.png?ex=65574f1c&is=6544da1c&hm=6f652deb0ca82d84e0ed9cd6ab861b006e105762178f9247ab04e83815f59414&=&width=1177&height=662");
     ctx.drawImage(gradientImage, 0, 0, canvasWidth, canvasHeight);
 
     const avatar = await loadImage(this.avatar);
 
-    ctx.fillStyle = "#FFD700";
+    
+    ctx.fillStyle = this.usernameColor; // Use the provided username color
     ctx.font = "91px username";
     ctx.textAlign = "center";
     ctx.fillText(`${this.username}`.toUpperCase(), centerX, centerY + 70);
-    ctx.fillStyle = "#FFFFFF";
-    ctx.globalAlpha = 0.4;
 
-    ctx.fillStyle = "#00BFFF";
+    ctx.fillStyle = this.titleColor; // Use the provided title color
     ctx.font = "76px welcome";
     ctx.fillText(`${this.title}`, centerX, centerY + 150);
 
-    ctx.fillStyle = "#FFFFFF";
+    ctx.fillStyle = this.messageColor; // Use the provided message color
     ctx.font = "bold 41px message";
     ctx.fillText(`${this.message}`.toUpperCase(), centerX, centerY + 290);
 
