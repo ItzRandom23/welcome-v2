@@ -1,19 +1,19 @@
 const { createCanvas, loadImage, GlobalFonts } = require("@napi-rs/canvas");
 
 GlobalFonts.registerFromPath(
-  "node_modules/welcome-canvas/font/PlayfairDisplay-SemiBold.ttf",
+  "node_modules/welcome-card-discord/font/PlayfairDisplay-SemiBold.ttf",
   "username"
 );
 GlobalFonts.registerFromPath(
-  "node_modules/welcome-canvas/font/Montserrat-ExtraLight.ttf",
+  "node_modules/welcome-card-discord/font/Montserrat-ExtraLight.ttf",
   "message"
 );
 GlobalFonts.registerFromPath(
-  "node_modules/welcome-canvas/font/Ubuntu-Regular.ttf",
+  "node_modules/welcome-card-discord/font/Ubuntu-Regular.ttf",
   "welcome"
 );
 
-const imageUrls = "https://media.discordapp.net/attachments/1118398421406068796/1164200559797096448/b53dc405-19e7-4aea-98e1-4b66509ca30a.png?ex=6554ce43&is=65425943&hm=49da0ba960d7f14b57fd6aa130028b00752b56a50f1f0698f59f835addbdc14b&=&width=993&height=662";
+const imageUrls = "https://s6.imgcdn.dev/9W4xv.png";
 
 class Welcome {
   constructor(options) {
@@ -94,7 +94,7 @@ class Welcome {
     const backgroundImage = await loadImage(this.background);
     ctx.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
 
-    const gradientImage = await loadImage("https://media.discordapp.net/attachments/1118398421406068796/1167425380274147449/ZqFsH.png?ex=65574f1c&is=6544da1c&hm=6f652deb0ca82d84e0ed9cd6ab861b006e105762178f9247ab04e83815f59414&=&width=1177&height=662");
+    const gradientImage = await loadImage("https://s6.imgcdn.dev/9WMon.png");
     ctx.drawImage(gradientImage, 0, 0, canvasWidth, canvasHeight);
 
     const avatar = await loadImage(this.avatar);

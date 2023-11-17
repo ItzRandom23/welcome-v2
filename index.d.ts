@@ -1,4 +1,4 @@
-declare class welcome {
+declare class Welcome {
     constructor(options: {
       username?: string;
       avatar?: string;
@@ -18,5 +18,5 @@ declare class welcome {
     build(): Promise<Buffer>;
 }
   
-  export = welcome;
+  export = Welcome;
   

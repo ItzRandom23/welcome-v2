@@ -1,22 +1,22 @@
-# Welcome-Canvas
+# welcome-card-discord
 
-Welcome-Canvas is a Node.js module for creating customized welcome images for Discord servers. It allows you to generate beautiful welcome images with user avatars, usernames, and a custom message.
+welcome-card-discord is a Node.js module for creating customized welcome images for Discord servers. It allows you to generate beautiful welcome images with user avatars, usernames, and a custom message.
 
 ## Installation
 
-You can install Welcome-Canvas via npm:
+You can install welcome-card-discord via npm:
 
 ```bash
-npm install welcome-canvas
+npm install welcome-card-discord
 ```
 
 ## Usage
 
-Here's an example of how to use Welcome-Canvas in your Discord bot:
+Here's an example of how to use welcome-card-discord in your Discord bot:
 
 ```javascript
 const { Client, GatewayIntentBits } = require('discord.js');
-const { Welcome } = require('welcome-canvas'); 
+const { Welcome } = require('welcome-card-discord'); 
 
 const client = new Client({
   intents: [
