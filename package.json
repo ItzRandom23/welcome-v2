@@ -2,9 +2,9 @@
   "dependencies": {
     "@napi-rs/canvas": "^0.1.44"
   },
-  "name": "welcome-card-discord",
+  "name": "welcome-v2",
   "version": "0.0.1",
-  "description": "welcome-card-discord is a powerful canvas project with high-quality design ",
+  "description": "welcome-v2 is a powerful canvas project with high-quality design.",
   "main": "welcome.js",
   "devDependencies": {
     "@types/node": "^20.8.10"
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MrRandom23/welcome-card-discord.git"
+    "url": "https://github.com/MrRandom23/welcome-v2.git"
   }, 
   "keywords": [
     "welcome-bot",
@@ -31,7 +31,7 @@
   "author": "itzrandom",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MrRandom23/welcome-card-discord/issues"
+    "url": "https://github.com/MrRandom23/welcome-v2/issues"
   },
-  "homepage": "https://github.com/MrRandom23/welcome-card-discord#readme"
+  "homepage": "https://github.com/MrRandom23/welcome-v2#readme"
 }

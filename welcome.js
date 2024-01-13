@@ -1,15 +1,15 @@
 const { createCanvas, loadImage, GlobalFonts } = require("@napi-rs/canvas");
 
 GlobalFonts.registerFromPath(
-  "node_modules/welcome-card-discord/font/PlayfairDisplay-SemiBold.ttf",
+  "node_modules/welcome-v2/font/PlayfairDisplay-SemiBold.ttf",
   "username"
 );
 GlobalFonts.registerFromPath(
-  "node_modules/welcome-card-discord/font/Montserrat-ExtraLight.ttf",
+  "node_modules/welcome-v2/font/Montserrat-ExtraLight.ttf",
   "message"
 );
 GlobalFonts.registerFromPath(
-  "node_modules/welcome-card-discord/font/Ubuntu-Regular.ttf",
+  "node_modules/welcome-v2/font/Ubuntu-Regular.ttf",
   "welcome"
 );
 

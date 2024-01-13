@@ -1,22 +1,22 @@
-# welcome-card-discord
+# welcome-v2
 
-welcome-card-discord is a Node.js module for creating customized welcome images for Discord servers. It allows you to generate beautiful welcome images with user avatars, usernames, and a custom message.
+welcome-v2 is a Node.js module for creating customized welcome images for Discord servers. It allows you to generate beautiful welcome images with user avatars, usernames, and a custom message.
 
 ## Installation
 
-You can install welcome-card-discord via npm:
+You can install welcome-v2 via npm:
 
 ```bash
-npm install welcome-card-discord
+npm install welcome-v2
 ```
 
 ## Usage
 
-Here's an example of how to use welcome-card-discord in your Discord bot:
+Here's an example of how to use welcome-v2 in your Discord bot:
 
 ```javascript
 const { Client, GatewayIntentBits } = require('discord.js');
-const { Welcome } = require('welcome-card-discord'); 
+const { Welcome } = require('welcome-v2'); 
 
 const client = new Client({
   intents: [
@@ -93,7 +93,7 @@ client.login("Bot_Token_Here")
 - Set the background to display on the welcome card.
 
 ## Preview
-![preview](https://s6.imgcdn.dev/99feL.png)
+![preview](https://s6.imgcdn.dev/fKfIy.png)
 
 ## License
 
