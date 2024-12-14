@@ -1,9 +1,9 @@
 {
   "dependencies": {
-    "@napi-rs/canvas": "^0.1.44"
+    "@napi-rs/canvas": "^0.1.65"
   },
   "name": "welcome-v2",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "welcome-v2 is a powerful canvas project with high-quality design.",
   "main": "welcome.js",
   "devDependencies": {
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MrRandom23/welcome-v2.git"
+    "url": "https://github.com/ItzRandom23/welcome-v2.git"
   }, 
   "keywords": [
     "welcome-bot",
@@ -31,7 +31,7 @@
   "author": "itzrandom",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MrRandom23/welcome-v2/issues"
+    "url": "https://github.com/ItzRandom23/welcome-v2/issues"
   },
-  "homepage": "https://github.com/MrRandom23/welcome-v2#readme"
+  "homepage": "https://github.com/ItzRandom23/welcome-v2#readme"
 }

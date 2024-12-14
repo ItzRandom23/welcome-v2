@@ -1,37 +1,45 @@
 const { createCanvas, loadImage, GlobalFonts } = require("@napi-rs/canvas");
 
-GlobalFonts.registerFromPath(
-  "node_modules/welcome-v2/font/PlayfairDisplay-SemiBold.ttf",
-  "username"
-);
-GlobalFonts.registerFromPath(
-  "node_modules/welcome-v2/font/Montserrat-ExtraLight.ttf",
-  "message"
-);
-GlobalFonts.registerFromPath(
-  "node_modules/welcome-v2/font/Ubuntu-Regular.ttf",
-  "welcome"
-);
+const FONT_PATHS = {
+  username: "node_modules/welcome-v2/font/Poppins-Bold.ttf",
+   message: "node_modules/welcome-v2/font/OpenSans-Regular.ttf",
+   welcome: "node_modules/welcome-v2/font/Nunito-SemiBold.ttf",
+ };
 
-const imageUrls = "https://s6.imgcdn.dev/9W4xv.png";
+GlobalFonts.registerFromPath(FONT_PATHS.username, "username");
+GlobalFonts.registerFromPath(FONT_PATHS.message, "message");
+GlobalFonts.registerFromPath(FONT_PATHS.welcome, "welcome");
+
+const DEFAULT_BACKGROUND = "https://s6.imgcdn.dev/9W4xv.png";
+const DEFAULT_GRADIENT = "https://s6.imgcdn.dev/9WMon.png";
+const DEFAULT_COLORS = {
+  username: "#FFD700", //FFD700",
+  title: "#00BFFF",//00BFFF",
+  message: "#FFFFFF",
+};
 
 class Welcome {
-  constructor(options) {
-    this.username = options?.username;
-    this.avatar = options?.avatar;
-    this.title = options?.title;
-    this.message = options?.message;
-    this.background = options?.background;
-    this.usernameColor = options?.usernameColor || "#FFD700"; // Default color
-    this.titleColor = options?.titleColor || "#00BFFF"; // Default color
-    this.messageColor = options?.messageColor || "#FFFFFF"; // Default color
+  constructor(options = {}) {
+    this.username = options.username;
+    this.avatar = options.avatar;
+    this.title = options.title || "WELCOME";
+    this.message = options.message;
+    this.background = options.background || DEFAULT_BACKGROUND;
+    this.usernameColor = options.usernameColor || DEFAULT_COLORS.username;
+    this.titleColor = options.titleColor || DEFAULT_COLORS.title;
+    this.messageColor = options.messageColor || DEFAULT_COLORS.message;
+
+    this.canvasWidth = 1280;
+    this.canvasHeight = 720;
+  }
+
+  truncateText(text, maxLength) {
+    return text.length > maxLength ? `${text.slice(0, maxLength - 3)}...` : text;
   }
 
   setName(name, usernameColor) {
     this.username = name;
-    if (usernameColor) {
-      this.usernameColor = usernameColor;
-    }
+    if (usernameColor) this.usernameColor = usernameColor;
     return this;
   }
 
@@ -42,17 +50,13 @@ class Welcome {
 
   setTitle(title, titleColor) {
     this.title = title;
-    if (titleColor) {
-      this.titleColor = titleColor;
-    }
+    if (titleColor) this.titleColor = titleColor;
     return this;
   }
 
   setMessage(message, messageColor) {
     this.message = message;
-    if (messageColor) {
-      this.messageColor = messageColor;
-    }
+    if (messageColor) this.messageColor = messageColor;
     return this;
   }
 
@@ -61,67 +65,47 @@ class Welcome {
     return this;
   }
 
-
   async build() {
-    if (!this.username) throw new Error("Provide username to display on card");
-    if (!this.avatar) throw new Error("Provide valid avatar url of user");
-    if (!this.title) this.setTitle("WELCOME");
-    if (!this.message) throw new Error("Provide message to display on card");
-    if (!this.background) this.setBackground(imageUrls);
+    if (!this.username) throw new Error("Provide a username to display on the card.");
+    if (!this.avatar) throw new Error("Provide a valid avatar URL.");
+    if (!this.message) throw new Error("Provide a message to display on the card.");
 
-    if (this.username.length >= 27) {
-      this.username = this.username.slice(0, 24) + "...";
-    }
+    this.username = this.truncateText(this.username, 27);
+    this.title = this.truncateText(this.title, 27);
+    this.message = this.truncateText(this.message, 27);
 
-    if (this.title.length >= 27) {
-      this.title = this.title.slice(0, 24) + "...";
-    }
-
-    if (this.message.length >= 27) {
-      this.message = this.message.slice(0, 24) + "...";
-    }
-
-    const canvasWidth = 1280;
-    const canvasHeight = 720;
-
-    const centerX = canvasWidth / 2;
-    const centerY = canvasHeight / 2;
-
-    const canvas = createCanvas(canvasWidth, canvasHeight);
+    const canvas = createCanvas(this.canvasWidth, this.canvasHeight);
     const ctx = canvas.getContext("2d");
 
-    // Load the current background image
     const backgroundImage = await loadImage(this.background);
-    ctx.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
+    ctx.drawImage(backgroundImage, 0, 0, this.canvasWidth, this.canvasHeight);
 
-    const gradientImage = await loadImage("https://s6.imgcdn.dev/9WMon.png");
-    ctx.drawImage(gradientImage, 0, 0, canvasWidth, canvasHeight);
+    const gradientImage = await loadImage(DEFAULT_GRADIENT);
+    ctx.drawImage(gradientImage, 0, 0, this.canvasWidth, this.canvasHeight);
 
     const avatar = await loadImage(this.avatar);
-
-    
-    ctx.fillStyle = this.usernameColor; // Use the provided username color
-    ctx.font = "91px username";
-    ctx.textAlign = "center";
-    ctx.fillText(`${this.username}`.toUpperCase(), centerX, centerY + 70);
-
-    ctx.fillStyle = this.titleColor; // Use the provided title color
-    ctx.font = "76px welcome";
-    ctx.fillText(`${this.title}`, centerX, centerY + 150);
-
-    ctx.fillStyle = this.messageColor; // Use the provided message color
-    ctx.font = "bold 41px message";
-    ctx.fillText(`${this.message}`.toUpperCase(), centerX, centerY + 290);
-
-    ctx.globalAlpha = 1;
-
+    const avatarX = 510, avatarY = 92, avatarSize = 260;
     ctx.save();
     ctx.beginPath();
-    ctx.arc(510 + 130, 92 + 130, 130, 0, Math.PI * 2);
+    ctx.arc(avatarX + avatarSize / 2, avatarY + avatarSize / 2, avatarSize / 2, 0, Math.PI * 2);
     ctx.closePath();
     ctx.clip();
-    ctx.drawImage(avatar, 510, 92, 260, 260);
+    ctx.drawImage(avatar, avatarX, avatarY, avatarSize, avatarSize);
     ctx.restore();
+
+    ctx.textAlign = "center";
+
+    ctx.fillStyle = this.usernameColor;
+    ctx.font = "91px username";
+    ctx.fillText(this.username.toUpperCase(), this.canvasWidth / 2, this.canvasHeight / 2 + 70);
+
+    ctx.fillStyle = this.titleColor;
+    ctx.font = "76px welcome";
+    ctx.fillText(this.title, this.canvasWidth / 2, this.canvasHeight / 2 + 150);
+
+    ctx.fillStyle = this.messageColor;
+    ctx.font = "bold 41px message";
+    ctx.fillText(this.message.toUpperCase(), this.canvasWidth / 2, this.canvasHeight / 2 + 290);
 
     return canvas.toBuffer("image/png");
   }
