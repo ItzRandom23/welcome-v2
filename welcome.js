@@ -13,8 +13,8 @@ GlobalFonts.registerFromPath(FONT_PATHS.welcome, "welcome");
 const DEFAULT_BACKGROUND = "https://s6.imgcdn.dev/9W4xv.png";
 const DEFAULT_GRADIENT = "https://s6.imgcdn.dev/9WMon.png";
 const DEFAULT_COLORS = {
-  username: "#FFD700", //FFD700",
-  title: "#00BFFF",//00BFFF",
+  username: "#FFD700", 
+  title: "#00BFFF",
   message: "#FFFFFF",
 };
 
@@ -78,13 +78,26 @@ class Welcome {
     const ctx = canvas.getContext("2d");
 
     const backgroundImage = await loadImage(this.background);
+    ctx.globalAlpha = 0.8; 
+    ctx.filter = "blur(5px)"; 
     ctx.drawImage(backgroundImage, 0, 0, this.canvasWidth, this.canvasHeight);
+    ctx.filter = "none"; 
+    ctx.globalAlpha = 1.0; 
 
     const gradientImage = await loadImage(DEFAULT_GRADIENT);
     ctx.drawImage(gradientImage, 0, 0, this.canvasWidth, this.canvasHeight);
 
     const avatar = await loadImage(this.avatar);
     const avatarX = 510, avatarY = 92, avatarSize = 260;
+    const borderSize = 5; 
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(avatarX + avatarSize / 2, avatarY + avatarSize / 2, avatarSize / 2 + borderSize, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fillStyle = "#FFFFFF"; 
+    ctx.fill();
+    ctx.restore();
+
     ctx.save();
     ctx.beginPath();
     ctx.arc(avatarX + avatarSize / 2, avatarY + avatarSize / 2, avatarSize / 2, 0, Math.PI * 2);

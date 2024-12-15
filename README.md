@@ -166,7 +166,7 @@ client.login("YOUR_BOT_TOKEN");
 - Set the background to display on the welcome card.
 
 ## Preview
-![preview](https://s6.imgcdn.dev/89h1B.png)
+![preview](https://s6.imgcdn.dev/8VyEC.png)
 
 ## License
 
